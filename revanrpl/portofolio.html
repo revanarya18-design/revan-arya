@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Revan – Full Upgrade</title>
+
+    <!-- SEO -->
+    <meta name="description" content="Portofolio Revan Arya Putra Diandra – Full Stack Developer, Web Designer, Software Engineer.">
+    <meta name="keywords" content="Revan Arya Putra Diandra, portfolio, developer, web programmer, fullstack">
+    <meta name="theme-color" content="#0d1117">
+
+    <!-- Font & AOS -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+
+    <style>
+        /* ===================== VARIABLES ===================== */
+        :root {
+            --bg: #0d1117;
+            --card: rgba(255, 255, 255, 0.05);
+            --glass: rgba(255, 255, 255, 0.08);
+            --text: #e5e7eb;
+            --sub: #9ca3af;
+            --primary: #3b82f6;
+            --border: rgba(255,255,255,0.1);
+        }
+
+        :root.light {
+            --bg: #f4f4f4;
+            --card: rgba(255, 255, 255, 0.75);
+            --glass: rgba(0,0,0,0.05);
+            --text: #1f1f1f;
+            --sub: #555;
+            --primary: #2563eb;
+            --border: #cfcfcf;
+        }
+
+        * {
+            transition: background .3s ease, color .3s ease, border .3s ease;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: "Inter", sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* ===================== SOSIAL MEDIA ===================== */
+        .social-icons {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+        }
+        .social-icons a {
+            width: 45px;
+            height: 45px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            color: var(--primary);
+            font-size: 22px;
+            cursor: pointer;
+            transition: .2s;
+        }
+        .social-icons a:hover {
+            background: var(--primary);
+            color: #fff;
+            transform: scale(1.15);
+        }
+
+        /* ===================== PRELOADER ===================== */
+        #preloader {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: var(--bg);
+            display: grid;
+            place-items: center;
+            z-index: 3000;
+            transition: opacity .5s ease, visibility .5s;
+        }
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 5px solid var(--primary);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite, glow 1.5s infinite ease;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes glow {
+            0%,100% { box-shadow: 0 0 5px var(--primary); }
+            50% { box-shadow: 0 0 20px var(--primary); }
+        }
+
+        /* ===================== NAVBAR ===================== */
+        nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: var(--glass);
+            padding: 15px 0;
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            transition: .3s ease;
+        }
+        nav.scrolled {
+            box-shadow: 0 4px 25px rgba(0,0,0,0.3);
+        }
+        .container-nav {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav h3 {
+            font-size: 25px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        nav ul li a {
+            color: var(--sub);
+            text-decoration: none;
+            font-size: 16px;
+        }
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        #theme-toggle {
+            font-size: 22px;
+            background: none;
+            border: none;
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        /* ===================== HEADER ===================== */
+        header {
+            padding: 160px 20px 100px;
+            text-align: center;
+            background: linear-gradient(180deg, #111827, transparent);
+            background-attachment: fixed;
+        }
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid var(--primary);
+            object-fit: cover;
+            box-shadow: 0 0 20px rgba(59,130,246,0.5);
+        }
+        header h1 {
+            font-size: 46px;
+            font-weight: 800;
+        }
+        #typing {
+            font-size: 18px;
+            color: var(--primary);
+            font-weight: 600;
+            margin-top: -10px;
+            height: 22px;
+        }
+
+        /* ===================== CARD ===================== */
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+        }
+        .card {
+            background: var(--card);
+            padding: 30px;
+            margin: 40px 0;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+            transition: .2s ease;
+        }
+
+        /* ===================== SKILLS ===================== */
+        .skills ul {
+            display: grid;
+            gap: 12px;
+            grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+            padding: 0;
+        }
+        .skills li {
+            list-style: none;
+            background: var(--glass);
+            padding: 12px;
+            text-align: center;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            transition: .2s;
+        }
+        .skills li:hover {
+            transform: scale(1.07);
+            background: var(--primary);
+            color: #fff;
+        }
+
+        /* ===================== PROJECT ===================== */
+        .projects-grid {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+        }
+        .project-item {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: 12px;
+            transform-style: preserve-3d;
+            transition: .2s;
+            cursor: pointer;
+        }
+        .project-item:hover {
+            border-color: var(--primary);
+        }
+
+        /* ===================== BUTTON ===================== */
+        .button {
+            background: var(--primary);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        /* ===================== GALLERY ===================== */
+        .gallery-grid {
+            display: grid;
+            gap: 18px;
+            grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
+        }
+        .gallery-grid img {
+            width: 100%;
+            height: 180px;
+            border-radius: 12px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: .2s;
+        }
+        .gallery-grid img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Lightbox */
+        #lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            place-items: center;
+            z-index: 2000;
+        }
+        #lightbox img {
+            width: 70%;
+            max-width: 600px;
+            border-radius: 12px;
+        }
+
+        /* Modal Project */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.75);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+        }
+        .modal-content {
+            background: var(--card);
+            padding: 30px;
+            border-radius: 14px;
+            max-width: 500px;
+            border: 1px solid var(--border);
+        }
+
+        /* Scroll to top */
+        #topBtn {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            background: var(--primary);
+            color: #fff;
+            padding: 12px;
+            border-radius: 50%;
+            display: none;
+            cursor: pointer;
+        }
+
+        /* WA Floating Button */
+        #wa-float {
+            position: fixed;
+            left: 25px;
+            bottom: 25px;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: 28px;
+            cursor: pointer;
+            box-shadow: 0 0 12px var(--primary);
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- PRELOADER -->
+<div id="preloader"><div class="loader"></div></div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+    <div class="container-nav">
+        <h3>Revan.dev</h3>
+
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <button id="theme-toggle">🌙</button>
+    </div>
+</nav>
+
+<!-- HEADER -->
+<header data-aos="fade-up">
+    <img src="revan.jpeg" class="profile-img" alt="">
+    <h1>Revan Arya Putra Diandra</h1>
+    <p id="typing"></p>
+</header>
+
+<div class="container">
+
+    <!-- ABOUT -->
+    <section id="about" class="card" data-aos="fade-up">
+        <h2>Tentang Saya</h2>
+        <p>Saya adalah pengembang web yang berfokus pada pembuatan aplikasi modern.</p>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="card skills" data-aos="fade-up">
+        <h2>Kemampuan</h2>
+        <ul>
+            <li>HTML / CSS / JS</li>
+            <li>React.js</li>
+            <li>Node.js</li>
+            <li>Laravel</li>
+            <li>API Development</li>
+            <li>UI/UX Design</li>
+            <li>MySQL / MongoDB</li>
+            <li>DevOps / Git</li>
+        </ul>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="card" data-aos="fade-up">
+        <h2>Proyek</h2>
+
+        <div class="projects-grid">
+
+            <div class="project-item" onclick="openModal('Dashboard ERP','Dashboard perusahaan modern menggunakan React.js, Node.js, Chart.js.')">
+                <h3>Dashboard ERP</h3>
+                <p>Sistem dashboard manajemen perusahaan.</p>
+            </div>
+
+            <div class="project-item" onclick="openModal('Company Profile Modern','Website profesional untuk perusahaan teknologi.')">
+                <h3>Company Profile Modern</h3>
+                <p>Website modern clean dan responsif.</p>
+            </div>
+
+            <div class="project-item" onclick="openModal('Task Manager App','Aplikasi mencatat tugas berbasis web dengan localStorage.')">
+                <h3>Aplikasi Task Manager</h3>
+                <p>Aplikasi manajemen tugas modern.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery" class="card" data-aos="fade-up">
+        <h2>Galeri</h2>
+        <div class="gallery-grid">
+            <img src="gojo.jpg" onclick="showLightbox(this.src)">
+            <img src="deku.jpg" onclick="showLightbox(this.src)">
+            <img src="sukuna.jpg" onclick="showLightbox(this.src)">
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="card" data-aos="fade-up">
+        <h2>Kontak</h2>
+
+        <p>Email: <b onclick="copy('revanarya18@gmail.com')">revanarya18@gmail.com</b></p>
+        <p>WhatsApp: <b onclick="copy('08990387086')">08990387086</b></p>
+        <p>LinkedIn: <b onclick="copy('linkedin.com/in/revanarya')">linkedin.com/in/revanarya</b></p>
+
+        <div class="social-icons">
+            <a href="https://wa.me/628990387086" target="_blank">💬</a>
+            <a href="https://instagram.com/revan" target="_blank">📸</a>
+            <a href="https://github.com/revan" target="_blank">🐱</a>
+            <a href="https://linkedin.com/in/revanarya" target="_blank">💼</a>
+        </div>
+    </section>
+
+</div>
+
+<!-- SCROLL TO TOP -->
+<div id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">⬆</div>
+
+<!-- FLOATING WA -->
+<div id="wa-float" onclick="window.open('https://wa.me/628990387086','_blank')">💬</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="this.style.display='none'">
+    <img id="lightbox-img">
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+    <div class="modal-content" id="modal-content"></div>
+</div>
+
+<footer style="text-align:center;padding:25px;color:var(--sub)">
+    © 2025 — Portofolio Revan Arya Putra Diandra
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>AOS.init()</script>
+
+<script>
+/* ===================== THEME SYSTEM ===================== */
+const toggle = document.getElementById("theme-toggle");
+const root = document.documentElement;
+
+const saved = localStorage.getItem("theme") || "dark";
+setTheme(saved);
+
+function setTheme(mode) {
+    if(mode === "light") {
+        root.classList.add("light");
+        toggle.textContent = "🌙";
+    } else {
+        root.classList.remove("light");
+        toggle.textContent = "☀️";
+    }
+    localStorage.setItem("theme", mode);
+}
+
+toggle.onclick = () => {
+    const newMode = root.classList.contains("light") ? "dark" : "light";
+    setTheme(newMode);
+};
+
+/* ===================== PRELOADER ===================== */
+window.onload = () => {
+    const loader = document.getElementById("preloader");
+    loader.style.opacity = "0";
+    setTimeout(() => loader.style.display = "none", 700);
+};
+
+/* ===================== NAVBAR SCROLL ===================== */
+const navbar = document.getElementById("navbar");
+const topBtn = document.getElementById("topBtn");
+
+window.addEventListener("scroll", () => {
+    navbar.classList.toggle("scrolled", window.scrollY > 20);
+    topBtn.style.display = window.scrollY > 250 ? "block" : "none";
+});
+
+/* ===================== LIGHTBOX ===================== */
+function showLightbox(src) {
+    document.getElementById("lightbox-img").src = src;
+    document.getElementById("lightbox").style.display = "grid";
+}
+
+/* ===================== MODAL ===================== */
+function openModal(title, desc) {
+    const modal = document.getElementById("modal");
+    const content = document.getElementById("modal-content");
+
+    content.innerHTML = `
+        <h2>${title}</h2>
+        <p>${desc}</p>
+        <br>
+        <button class='button' onclick='closeModal()'>Tutup</button>
+    `;
+    modal.style.display = "flex";
+}
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
+}
+
+/* ===================== 3D TILT ===================== */
+document.querySelectorAll(".project-item").forEach(card => {
+    card.addEventListener("mousemove", e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        card.style.transform = `rotateY(${x/25}deg) rotateX(${-y/25}deg)`;
+    });
+    card.addEventListener("mouseleave", () => {
+        card.style.transform = "rotateY(0) rotateX(0)";
+    });
+});
+
+/* ===================== COPY CLIPBOARD ===================== */
+function copy(text) {
+    navigator.clipboard.writeText(text);
+    alert("Disalin: " + text);
+}
+
+/* ===================== NAVBAR ACTIVE SECTION ===================== */
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll("nav ul li a");
+
+window.addEventListener("scroll", () => {
+    let current = "";
+
+    sections.forEach(sec => {
+        if (window.scrollY >= sec.offsetTop - 200) {
+            current = sec.getAttribute("id");
+        }
+    });
+
+    navLinks.forEach(a => {
+        a.classList.remove("active");
+        if (a.getAttribute("href").includes(current)) {
+            a.classList.add("active");
+        }
+    });
+});
+
+/* ===================== TYPING EFFECT ===================== */
+const typingText = [
+    "Full-Stack Developer",
+    "Web Designer",
+    "Software Engineer",
+    "Problem Solver"
+];
+let i = 0, j = 0, deleting = false;
+
+function typeEffect() {
+    let current = typingText[i];
+    let display = current.substring(0, j);
+    document.getElementById("typing").textContent = display;
+
+    if (!deleting && j < current.length) j++;
+    else if (deleting && j > 0) j--;
+    else if (!deleting && j === current.length) setTimeout(() => deleting = true, 800);
+    else if (deleting && j === 0) deleting = false, i = (i + 1) % typingText.length;
+
+    setTimeout(typeEffect, 90);
+}
+typeEffect();
+</script>
+
+</body>
+</html>
